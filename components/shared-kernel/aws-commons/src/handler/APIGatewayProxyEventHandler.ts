@@ -6,8 +6,8 @@ import { UseCase } from './use-case/UseCase';
 import { UseCaseResult } from './use-case/UseCaseResult';
 
 export abstract class APIGatewayProxyEventHandler<
-  E extends ImmutableDto<any>,
-  U extends UseCase<E, UseCaseResult<any>>
+  E extends ImmutableDto<unknown>,
+  U extends UseCase<E, UseCaseResult<unknown>>
 > extends BaseHandler<APIGatewayProxyEvent, E, U> {
   abstract process(event: E): APIGatewayProxyResult;
 
@@ -19,7 +19,7 @@ export abstract class APIGatewayProxyEventHandler<
       return APIGatewayProxyEventHandler.internalServerError();
     }
   }
-  static ok(result: any): APIGatewayProxyResult {
+  static ok(result: unknown): APIGatewayProxyResult {
     return { statusCode: 200, body: result ? JSON.stringify(result) : '' };
   }
   static internalServerError(): APIGatewayProxyResult {
