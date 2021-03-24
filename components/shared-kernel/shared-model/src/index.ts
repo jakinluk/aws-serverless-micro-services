@@ -1,1 +1,1 @@
-export function handler(): void {}
+export * from './event/Event';

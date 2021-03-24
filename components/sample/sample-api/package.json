@@ -13,9 +13,10 @@
     "transpile": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
-    "@lkie/aws-commons": "1.0.0"
+    "@lkie/aws-commons": "1.0.0",
+    "@lkie/shared-model": "1.0.0"
   },
-  "files" :[
+  "files": [
     "lib"
   ],
   "author": "Lukasz Kiedrowski",
