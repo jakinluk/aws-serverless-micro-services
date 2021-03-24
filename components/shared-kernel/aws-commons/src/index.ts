@@ -1,2 +1,1 @@
-export function handler(): void {
-} 
+export * from './handler';

@@ -13,10 +13,12 @@
     "transpile": "tsc -p tsconfig.build.json"
   },
   "dependencies": {
+    "@lkie/shared-model": "1.0.0",
     "aws-sdk": "2.869.0",
-    "aws-xray-sdk": "3.2.0"
+    "aws-xray-sdk": "3.2.0",
+    "freeze-mutate": "1.1.2"
   },
-  "files" :[
+  "files": [
     "lib"
   ],
   "author": "Lukasz Kiedrowski",
