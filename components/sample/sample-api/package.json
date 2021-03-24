@@ -1,0 +1,23 @@
+{
+  "name": "@lkie/sample-api",
+  "version": "1.0.0",
+  "description": "sample service API",
+  "main": "index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "run-s clean transpile",
+    "clean": "rimraf ./lib",
+    "transpile": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@lkie/aws-commons": "1.0.0"
+  },
+  "files" :[
+    "lib"
+  ],
+  "author": "Lukasz Kiedrowski",
+  "license": "UNLICENSED"
+}

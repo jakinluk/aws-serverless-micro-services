@@ -1,0 +1,25 @@
+{
+  "name": "@lkie/shared-model",
+  "version": "1.0.0",
+  "description": "shared model",
+  "main": "index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "run-s clean transpile",
+    "clean": "rimraf ./lib",
+    "transpile": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "aws-sdk": "2.869.0",
+    "aws-xray-sdk": "3.2.0",
+    "freeze-mutate": "1.1.2"
+  },
+  "files": [
+    "lib"
+  ],
+  "author": "Lukasz Kiedrowski",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@lkie/aws-commons",
+  "version": "1.0.0",
+  "description": "aws-commons",
+  "main": "index.js",
+  "typings": "lib/index.d.ts",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "run-s clean transpile",
+    "clean": "rimraf ./lib",
+    "transpile": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "aws-sdk": "2.869.0",
+    "aws-xray-sdk": "3.2.0"
+  },
+  "files" :[
+    "lib"
+  ],
+  "author": "Lukasz Kiedrowski",
+  "license": "UNLICENSED"
+}

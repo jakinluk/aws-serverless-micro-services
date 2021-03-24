@@ -1,0 +1,13 @@
+{
+  "command": {
+    "version": {
+      "conventionalCommits": true,
+      "message": "chore(release): components released",
+      "changelogPreset": "conventional-changelog-conventionalcommits"
+    }
+  },
+  "packages": ["components/*/*"],
+  "version": "independent",
+  "npmClient": "yarn",
+  "useWorkspaces": true
+}
