@@ -1,6 +1,6 @@
 export class UseCaseError {
-  constructor(readonly message: string) {}
-  getErrorType(): string {
-    return this.constructor.name;
-  }
+	constructor(readonly message: string) {}
+	getErrorType(): string {
+		return this.constructor.name;
+	}
 }
