@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "build": "lerna run build --stream",
+    "shared-model": "lerna run build --stream --scope @lkie/shared-model",
+    "aws-commons": "lerna run build --stream --scope @lkie/aws-commons",
     "fix": "eslint --ext .ts --fix ./",
     "test": "jest"
   },
