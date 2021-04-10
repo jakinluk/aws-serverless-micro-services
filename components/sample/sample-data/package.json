@@ -16,6 +16,7 @@
   "dependencies": {
     "@lkie/sample-api": "^1.0.0",
     "@lkie/aws-commons": "1.0.0",
+    "@lkie/shared-model": "1.0.0",
     "aws-lambda": "1.0.6",
     "aws-sdk": "2.869.0",
     "aws-xray-sdk": "3.2.0"
