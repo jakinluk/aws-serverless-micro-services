@@ -1,4 +1,88 @@
-// sam
-// serverless api
-// serverless function
-// dynamo
+AWSTemplateFormatVersion: 2010-09-09
+Description: >-
+  sample-data
+
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Runtime: nodejs12.x
+    Timeout: 180
+    Tracing: Active
+    Environment:
+      Variables:
+        LOG_LEVEL: debug
+
+Metadata:
+
+Parameters:
+  CognitoArn: 
+    Type: String
+
+Mappings:
+
+Conditions:
+
+
+Resources:
+
+  RestAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      EndpointConfiguraion:
+        Type: REGIONAL
+      DefinitionBody:
+        Fn::Transform:
+          Name: 'AWS::Include'
+          Parameters:
+            Location: ./openapi.yaml
+
+  RestAPILogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub API-Gateway-Executions-Logs_${RestAPI}/api
+      
+  GetDataItemFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/index.getItemHandler
+      MemorySize: 256
+      Environment:
+        Variables:
+          ITEMS_TABLE: !Ref ItemsTable
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /items/{id}
+            Method: get
+      Policies:
+        - Version: '2012-10-17' 
+          Statement:
+            - Effect: Allow
+              Action:
+                - "dynamodb:GetItem"
+              Resource: !GetAtt ItemsTable.Arn
+  
+  ItemsTable: 
+    Type: AWS::DynamoDB::Table
+    Properties: 
+      AttributeDefinitions: 
+        - 
+          AttributeName: "key"
+          AttributeType: "S"
+        - 
+          AttributeName: "sort"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "key"
+          KeyType: "HASH"
+        - 
+          AttributeName: "sort"
+          KeyType: "RANGE"
+      TableName: !Sub "${AWS::StackName}-items"
+      BillingMode: PAY_PER_REQUEST
+      
+Outputs:
+

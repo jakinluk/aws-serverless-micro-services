@@ -1,0 +1,115 @@
+openapi: 3.0.1
+info:
+  title: sample data api
+  description: sample data description
+  license:
+    name: UNLICENSED
+  version: 0.0.0-semantic-version
+tags:
+  - name: sampleData
+x-amazon-apigateway-request-validators:
+  all:
+    validateRequestBody: true
+    validateRequestParameters: true
+  params-only:
+    validateRequestBody: false
+    validateRequestParameters: true
+x-amazon-apigateway-request-validator: all
+security:
+  - CognitoAuth: []
+paths:
+  "/items/{id}":
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: id
+    get:
+      tags:
+        - sample data
+      summary: get data item for given id
+      operationId: getItem
+      responses:
+        "200":
+          $ref: "#/components/schemas/SampleDataResponse"
+        "400":
+          $ref: "#/components/schemas/SampleDataErrorResponse"
+        "401":
+          $ref: "#/components/schemas/UnauthorizedError"
+      x-amazon-apigateway-integraion:
+        uri:
+          "Fn::Sub": >-
+            arn::${AWS::Partition}:apigateway:${AWS::Region}:lambda:path/2015-03-31/functions/arn:${AWS::Partition}:lambda:${AWS::Region}:${AWS::AccountId}:function:${GetDataItemFunction}/invocations
+        responses:
+          default:
+            statusCode: "200"
+        httpMethod: POST
+        contentHandling: CONVERT_TO_TEXT
+        type: aws_proxy
+    options:
+      tags:
+        - cors
+      security: []
+      responses:
+        "200":
+          description: 200 resp
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Empty"
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+            Access-Control-Allow-Methods:
+              schema:
+                type: string
+            Access-Control-Allow-Headers:
+              schema:
+                type: string
+      x-amazon-apigateway-integraion:
+        responses:
+          default:
+            statusCode: 200
+            responseParameters:
+              method.response.header.Access-Control-Allow-Methods: "'GET,OPTIONS'"
+              method.response.header.Access-Control-Allow-Headers: >-
+                'X-Amzm-Header,X-Apigateway-Header,X-Api-Key,Authorization,X-Amz-Date,Content-Type,X-Amz-Security-Token'
+              method.response.header.Access-Control-Allow-Origin: "'*'"
+        requestTemplates:
+          application/json: |
+            {
+              "statusCode": 200
+            }
+        type: mock
+x-amazon-apigateway-cors:
+  allowOrigins:
+    - "*"
+  allowMethods:
+    - GET
+    - OPTIONS
+  allowHEaders:
+    - X-Amzm-Header
+    - X-Apigateway-Header
+    - X-Api-Key
+    - Authorization
+    - X-Amz-Date
+    - Content-Type
+    - X-Amz-Security-Token
+components:
+  securitySchemes:
+    CognitoAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-amazon-apigateway-authtype: cognito_user_pools
+      x-amazon-apigateway-authorizer: 
+        type: cognito_user_pools
+        providerARNs:
+          - "Fn::Sub": "${CognitoArn}"
+  schemas:
+    Empty:
+      type: object
+      

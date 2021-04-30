@@ -1,0 +1,19 @@
+{
+  "name": "@lkie/sample-data-infrastructure",
+  "version": "1.0.0",
+  "description": "sample service data",
+  "main": "index.js",
+  "scripts": {
+    "build": "run-s clean transpile",
+    "clean": "rimraf ./build",
+    "transpile": "tsc -p tsconfig.build.json"
+  },
+  "dependencies": {
+    "@lkie/sample-data": "^1.0.0"
+  },
+  "files": [
+    "build"
+  ],
+  "author": "Lukasz Kiedrowski",
+  "license": "UNLICENSED"
+}
