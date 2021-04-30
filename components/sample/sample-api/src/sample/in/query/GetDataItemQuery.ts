@@ -10,7 +10,7 @@ export class GetDataItemQuery extends ImmutableDto<GetDataItemQueryProps> {
 		super(props);
 	}
 	static fromEvent(event: APIGatewayProxyEvent): GetDataItemQuery {
-		const props = {
+		const props:GetDataItemQueryProps = {
 			id: event.pathParameters.id,
 		};
 		return new GetDataItemQuery(props);
