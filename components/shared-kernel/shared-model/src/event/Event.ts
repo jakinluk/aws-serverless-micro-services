@@ -1,7 +1,8 @@
 import { ImmutableDto } from './ImmutableDto';
 import { v4 as uuidv4 } from 'uuid';
 
-export class Event<T> extends ImmutableDto<T> {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export class Event<T extends object> extends ImmutableDto<T> {
 	protected readonly id: string;
 	protected readonly timestamp: number;
 

@@ -1,4 +1,4 @@
-import { UseCaseResult } from '@lkie/aws-commons';
+import { UseCaseResult } from '@lkie/shared-model';
 import { GetDataItemQuery, GetDataItemResponse } from '@lkie/sample-api';
 import { GetDataItemUseCaseNotFoundError } from './GetDataItemUseCaseErrors';
 
