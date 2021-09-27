@@ -1,4 +1,4 @@
-import { UseCaseError } from '@lkie/aws-commons';
+import { UseCaseError } from '@lkie/shared-model';
 import { GetDataItemQuery } from '@lkie/sample-api';
 
 export class GetDataItemUseCaseNotFoundError extends UseCaseError {

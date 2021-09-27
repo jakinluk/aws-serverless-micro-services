@@ -1,2 +1,2 @@
-export * from './sample/in/query/GetDataItemQuery';
-export * from './sample/out/GetDataItemResponse';
+export * from './sample/rest/query/GetDataItemQuery';
+export * from './sample/rest/query/GetDataItemResponse';

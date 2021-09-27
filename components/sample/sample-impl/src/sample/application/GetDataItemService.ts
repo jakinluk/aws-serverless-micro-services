@@ -1,8 +1,8 @@
-import { UseCaseResult } from '@lkie/aws-commons';
+import { UseCaseResult } from '@lkie/shared-model';
 import { GetDataItemQuery, GetDataItemResponse } from '@lkie/sample-api';
 import { GetDataItemGateway } from '../domain/GetDataItemGateway';
 import { GetDataItemUseCaseNotFoundError } from '../domain/GetDataItemUseCaseErrors';
-import { ItemMapper } from '../domain/ItemMapper';
+import { ItemMapper } from '../domain/model/ItemMapper';
 import { ItemRepository } from './repository/ItemRepository';
 
 export class GetDataItemService implements GetDataItemGateway {
