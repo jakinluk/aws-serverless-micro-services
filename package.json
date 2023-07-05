@@ -32,7 +32,7 @@
     "jest-junit": "^16.0.0",
     "lerna": "^7.1.1",
     "npm-run-all": "^4.1.5",
-    "nx": "^16.5.0",
+    "nx": "16.5.0",
     "prettier": "^3.0.0",
     "proxy-agent": "^6.2.1",
     "rimraf": "^5.0.1",
@@ -43,7 +43,8 @@
     "typescript": "^5.1.6",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.74.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "nx-cloud": "latest"
   },
   "author": "Lukasz Kiedrowski",
   "license": "UNLICENSED"
