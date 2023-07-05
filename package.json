@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "sample service with DDD approach",
   "private": "true",
-  "workspaces": [
-    "components/*/*"
-  ],
   "scripts": {
     "build": "lerna run build --stream",
     "build:all": "nx run-many -t build",
@@ -49,5 +46,15 @@
     "nx-cloud": "latest"
   },
   "author": "Lukasz Kiedrowski",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "workspaces": {
+    "packages": [
+      "packages/*/*",
+      "services/*/*"
+    ],
+    "nohoist": [
+      "**"
+    ]
+  }
+
 }

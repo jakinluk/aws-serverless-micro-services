@@ -9,5 +9,5 @@
         "lib": ["es2017"],
         "outDir": "./lib"
     },
-    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "components/**/lib"]
+    "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts", "packages/**/lib"]
 } 
