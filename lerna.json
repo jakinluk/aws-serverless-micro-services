@@ -6,7 +6,6 @@
       "changelogPreset": "conventional-changelog-conventionalcommits"
     }
   },
-  "packages": ["components/*/*"],
   "version": "independent",
   "npmClient": "yarn",
   "useNx": true
