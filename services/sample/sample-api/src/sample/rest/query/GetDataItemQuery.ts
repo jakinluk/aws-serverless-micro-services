@@ -10,6 +10,9 @@ export class GetDataItemQuery extends ImmutableDto<GetDataItemQueryProps> {
 		super(props);
 	}
 	static fromEvent(event: APIGatewayProxyEvent): GetDataItemQuery {
+		if(!event.pathParameters?.id){
+			throw new Error('Invalid event: missing id');
+		}
 		const props:GetDataItemQueryProps = {
 			id: event.pathParameters.id,
 		};
