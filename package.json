@@ -8,6 +8,8 @@
   ],
   "scripts": {
     "build": "lerna run build --stream",
+    "build:all": "nx run-many -t build",
+    "build:app1": "nx build app1",
     "shared-model": "lerna run build --stream --scope @lkie/shared-model",
     "aws-commons": "lerna run build --stream --scope @lkie/aws-commons",
     "fix": "eslint --ext .ts --fix ./",
