@@ -1,0 +1,102 @@
+service: sample-data
+
+plugins:
+  # - serverless-plugin-monorepo
+  # - serverless-auto-swagger
+  - serverless-iam-roles-per-function
+  # - serverless-stage-manager
+  - serverless-cloudside-plugin
+  - serverless-offline # should be last of 'offline' plugins.
+  - serverless-prune-plugin
+  
+#Defined to avoid deprecated warning for new serverless version.
+projectDir: '..'
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${opt:stage,'dev'}
+  memorySize: 256
+  timeout: 6
+  # environment:
+    
+  httpApi:
+    # https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
+    payload: '1.0'
+
+custom:
+  bundle:
+  #   sourcemaps: true  
+    tsConfig: 'tsconfig.json'
+    esbuild: true
+    packager: yarn
+  #   linting: false
+
+  # region: ${opt:region, env:AWS_REGION}
+
+  prune:
+    automatic: true
+    number: 5
+
+  # autoswagger:
+  #   typefiles:
+  #     - './src/api/openapi/types.ts'
+  #   swaggerFiles:
+  #     - './src/api/openapi/openapi.json'
+  #   apiKeyHeaders:
+  #     - Authorization
+  #   excludeStages:
+  #     - prod
+  #   basePath: /${self:custom.basePath}
+
+functions:
+  getDataItem:
+    handler: src/index.getDataItemHandler
+    description: Gets data item
+    environment: 
+      ITEMS_TABLE: !Ref ItemsTable
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+        - dynamodb:GetItem
+        Resource: !GetAtt ItemsTable.Arn
+    events:
+      - httpApi:
+          method: GET
+          path: /items/{id}
+          # authorizer: jwtAuthorizer
+          # swaggerTags:
+          #   - items
+          # summary: Gets data item
+          # description: Gets data item
+          # bodyType: GetItemRequest
+          # responseData:
+          #   200:
+          #     bodyType: GetItemResponse
+          #   400:
+          #     description: Bad request
+
+resources:
+  Resources:
+      ItemsTable: 
+        Type: AWS::DynamoDB::Table
+        Properties: 
+          AttributeDefinitions: 
+            - 
+              AttributeName: "key"
+              AttributeType: "S"
+            - 
+              AttributeName: "sort"
+              AttributeType: "S"
+          KeySchema: 
+            - 
+              AttributeName: "key"
+              KeyType: "HASH"
+            - 
+              AttributeName: "sort"
+              KeyType: "RANGE"
+          TableName: !Sub "${AWS::StackName}-items"
+          BillingMode: PAY_PER_REQUEST
+  
