@@ -14,7 +14,6 @@
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
     "incremental": true,
-    "watch": true,
     "target": "es2020",
     "allowJs": true,
     "emitDecoratorMetadata": true,

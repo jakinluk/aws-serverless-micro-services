@@ -1,4 +1,5 @@
 .vscode
+.serverless
 node_modules
 build
 lib
