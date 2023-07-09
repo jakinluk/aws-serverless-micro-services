@@ -1,10 +1,9 @@
 import { UseCaseError } from './UseCaseError';
-import { freeze } from 'freeze-mutate';
 
 export class UseCaseResult<V, E = UseCaseError> {
 	private readonly value: V;
 	constructor(value: V, private error: E) {
-		this.value = freeze(value);
+		this.value = Object.freeze(value);
 	}
 	getError(): E {
 		return this.error;

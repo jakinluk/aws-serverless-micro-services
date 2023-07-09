@@ -20,8 +20,7 @@
     }
   },
   "dependencies": {
-    "uuid": "^8.3.2",
-    "freeze-mutate": "1.1.2"
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "esbuild": "^0.17.14",

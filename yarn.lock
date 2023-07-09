@@ -4907,11 +4907,6 @@ fp-ts@^2.13.1:
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.16.0.tgz#64e03314dfc1c7ce5e975d3496ac14bc3eb7f92e"
   integrity sha512-bLq+KgbiXdTEoT1zcARrWEpa5z6A/8b7PcDW7Gef3NSisQ+VS7ll2Xbf1E+xsgik0rWub/8u0qP/iTTjj+PhxQ==
 
-freeze-mutate@1.1.2:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/freeze-mutate/-/freeze-mutate-1.1.2.tgz#296ec5546938e11065cc1a2e5b5b4a7149ac0d1c"
-  integrity sha512-ml8IIUgc2AFHm59tcWhvCMceR6sUYP4xG5ZpuTs5rwi799ffP+22p25wySsXOEk3S3+lcmg/NTV7qH6u4fRrkA==
-
 from2@^2.1.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/from2/-/from2-2.3.0.tgz#8bfb5502bde4a4d36cfdeea007fcca21d7e382af"
