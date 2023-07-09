@@ -14,7 +14,7 @@ export abstract class APIGatewayProxyEventHandler<
   async handle(input: APIGatewayProxyEvent, context: Context): Promise<APIGatewayProxyResult> {
   	try {
   		// eslint-disable-next-line indent
-   return await this.process(this.extractEvent(input, context));
+      return await this.process(this.extractEvent(input, context));
   	} catch (err) {
   		console.log(err);
   		return APIGatewayProxyEventHandler.internalServerError();
