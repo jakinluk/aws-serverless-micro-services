@@ -1,0 +1,132 @@
+service: craftdocs
+
+plugins:
+  - serverless-esbuild
+  - serverless-iam-roles-per-function
+  - serverless-cloudside-plugin
+  - serverless-offline # should be last of 'offline' plugins.
+  - serverless-prune-plugin
+  
+package:
+  individually: true
+
+params:
+  default:
+    production: false
+    env: test
+    region: eu-north-1
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  stage: ${opt:stage,'dev'}
+  memorySize: 256
+  timeout: 6
+  # environment:
+  region: ${opt:region, env:AWS_REGION}
+    
+  httpApi:
+    # https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
+    payload: '1.0'
+
+custom:
+  esbuild:
+    packager: yarn
+    minify: false
+    # plugins: esbuild-plugins.js
+    bundle: true
+    sourcemap: true
+  prune:
+    automatic: true
+    number: 5
+
+functions:
+  updatesGateway:
+    handler: src/updatesGateway/index.updatesGatewayHandler
+    description: distributes updates
+    environment: 
+      UPDATES_TOPIC_ARN: !Ref DocUpdatesTopic
+      UPDATE_QUEUE_URL: !Ref UpdateDocQueue
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - sqs:SendMessage
+        Resource: !GetAtt UpdateDocQueue.Arn
+      - Effect: Allow
+        Action:
+          - sns:Publish
+        Resource: !Ref DocUpdatesTopic
+    events:
+      - httpApi:
+          method: PUT
+          path: /doc/{docId}/update/{uuid}
+  # logUpdateEvent: #move to dedicated service
+  #   handler: src/index.logUpdateEventHandler
+  #   description: Updates log
+  #   environment: 
+  #     TABLE_NAME: !Ref DocChangesLogTable
+  #   iamRoleStatementsInherit: true
+  #   iamRoleStatements:
+  #     - Effect: Allow
+  #       Action:
+  #         - dynamodb:PutItem
+  #       Resource: !GetAtt DocChangesLogTable.Arn
+  #   events:
+  #     - sqs:
+  #         arn: !GetAtt UpdateDocQueue.Arn
+  #         batchSize: 1
+  #         functionResponseType: ReportBatchItemFailures
+          
+resources:
+  Resources:
+      DocChangesLogTable: 
+        Type: AWS::DynamoDB::Table
+        Properties: 
+          AttributeDefinitions: 
+            - 
+              AttributeName: "pk"
+              AttributeType: "S"
+            - 
+              AttributeName: "sk"
+              AttributeType: "S"
+          KeySchema: 
+            - 
+              AttributeName: "pk"
+              KeyType: "HASH"
+            - 
+              AttributeName: "sk"
+              KeyType: "RANGE"
+          TableName: !Sub "${AWS::StackName}-doc-updates-log"
+          BillingMode: PAY_PER_REQUEST
+      UpdateDocQueue:
+        Type: AWS::SQS::Queue
+        Properties:
+          QueueName: !Sub "${AWS::StackName}-update-doc-queue"
+          MessageRetentionPeriod: 240
+          VisibilityTimeout: 20
+          RedrivePolicy:
+            deadLetterTargetArn: !GetAtt UpdateDocQueueDLQ.Arn
+            maxReceiveCount: 3
+
+      UpdateDocQueueDLQ:
+        Type: AWS::SQS::Queue
+        Properties:
+          QueueName: !Sub "${AWS::StackName}-update-doc-queue-dlq"
+          MessageRetentionPeriod: 1209600 # max, 14 days
+          Tags:
+            - Key: Type
+              Value: DLQ
+          
+      DocUpdatesTopic:
+        Type: AWS::SNS::Topic
+        Properties:
+          TopicName: !Sub "${AWS::StackName}-update-doc-topic"
+      
+      SnsSubscription:
+        Type: AWS::SNS::Subscription
+        Properties:
+          Protocol: sqs
+          Endpoint: !GetAtt UpdateDocQueue.Arn
+          TopicArn: !Ref DocUpdatesTopic
+  

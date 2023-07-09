@@ -1,5 +1,5 @@
 {
-  "name": "@lkie/sample-data",
+  "name": "@lkie/craftdocs-impl",
   "version": "1.0.0",
   "description": "sample service data",
   "scripts": {
@@ -9,12 +9,12 @@
     "lint:fix": "npx eslint . --ext .ts --fix",
     "start": "npx serverless offline cloudside --noAuth",
     "deploy": "npx serverless deploy",
-    "build": "npx serverless package",
-    "destroy": "npx serverless remove"
+    "destroy": "npx serverless remove",
+    "build": "npx serverless package"
   },
   "dependencies": {
     "aws-sdk": "2.1413.0",
-    "@lkie/sample-api": "^1.0.0",
+    "@lkie/craftdocs-api": "^1.0.0",
     "@lkie/aws-commons": "1.0.0",
     "@lkie/shared-model": "1.0.0"
   },
