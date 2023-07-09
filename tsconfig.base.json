@@ -27,6 +27,7 @@
     "paths": {
       "@lkie/shared-model": ["packages/shared-kernel/shared-model/src/index.ts"],
       "@lkie/aws-commons": ["packages/shared-kernel/aws-commons/src/index.ts"],
+      "@lkie/sample-api": ["services/sample/sample-api/src/index.ts"],
     }
   },
 }
