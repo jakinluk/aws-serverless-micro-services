@@ -1,4 +1,4 @@
 export interface GetDataItemResponse {
   id: string;
-  data: string;
+  data: string | Record<string, unknown>; 
 }
