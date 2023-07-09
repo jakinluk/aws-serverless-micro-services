@@ -1,0 +1,49 @@
+{
+  "name": "@lkie/craftdocs-impl",
+  "version": "1.0.0",
+  "description": "sample service data",
+  "scripts": {
+    "test": "npx jest test",
+    "test:coverage": "npx jest test --coverage",
+    "lint": "npx eslint . --ext .ts",
+    "lint:fix": "npx eslint . --ext .ts --fix",
+    "start": "npx serverless offline cloudside --noAuth",
+    "deploy": "npx serverless deploy",
+    "build": "npx serverless package"
+  },
+  "dependencies": {
+    "aws-sdk": "2.1413.0",
+    "@lkie/craftdocs-api": "^1.0.0",
+    "@lkie/aws-commons": "1.0.0",
+    "@lkie/shared-model": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.108",
+    "aws-sdk-client-mock": "^2.1.1",
+    "esbuild": "^0.17.14",
+    "serverless": "^3.29.0",
+    "serverless-auto-swagger": "^2.9.2",
+    "serverless-cloudside-plugin": "^1.0.6",
+    "serverless-dotenv-plugin": "^3.0.0",
+    "serverless-esbuild": "^1.45.1",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "esbuild-node-externals": "^1.8.0",
+    "serverless-offline": "^8.8.0",
+    "serverless-offline-ssm": "^5.0.2",
+    "serverless-prune-plugin": "^1.6.1"
+  },
+  "files": [
+    "lib"
+  ],
+  "author": "Lukasz Kiedrowski",
+  "license": "UNLICENSED",
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "./.serverless"
+        ]
+      }
+    }
+  }
+}
