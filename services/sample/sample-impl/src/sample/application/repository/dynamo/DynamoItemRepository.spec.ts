@@ -17,11 +17,11 @@ describe('DynamoItemRepository related tests', () => {
 	const buildKey = (id: string): DocumentClient.Key => {
 		return { pk: `ITEM_ID#${id}`, sk: 'ITEM#' };
 	};
-	const addItem = async (item: { [key: string]: unknown }, id: string): Promise<void> => {
+	const addItem = async (item: Record<string, unknown>, id: string): Promise<void> => {
 		await documentClient.put({ TableName: 'item', Item: { ...buildKey(id), ...item } }).promise();
 	};
 
-	it('should get item successfuly ', async () => {
+	it('should get item successfully ', async () => {
 		//given
 		const item = {
 			id: 'hjjhsjh',

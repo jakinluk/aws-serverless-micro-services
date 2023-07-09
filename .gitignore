@@ -2,4 +2,8 @@
 .serverless
 node_modules
 build
+.esbuild
+.build
 lib
+yarn-error.log
+.env

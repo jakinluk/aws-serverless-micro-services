@@ -3,15 +3,23 @@ service: sample-data
 plugins:
   # - serverless-plugin-monorepo
   # - serverless-auto-swagger
+  - serverless-esbuild
   - serverless-iam-roles-per-function
   # - serverless-stage-manager
   - serverless-cloudside-plugin
   - serverless-offline # should be last of 'offline' plugins.
   - serverless-prune-plugin
   
-#Defined to avoid deprecated warning for new serverless version.
-projectDir: '..'
-useDotenv: true
+# useDotenv: true
+
+package:
+  individually: true
+
+params:
+  default:
+    production: false
+    env: test
+    region: eu-north-1
 
 provider:
   name: aws
@@ -20,35 +28,23 @@ provider:
   memorySize: 256
   timeout: 6
   # environment:
+  region: ${opt:region, env:AWS_REGION}
     
   httpApi:
     # https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-lambda.html
     payload: '1.0'
 
 custom:
-  bundle:
-  #   sourcemaps: true  
-    tsConfig: 'tsconfig.json'
-    esbuild: true
+  esbuild:
     packager: yarn
-  #   linting: false
-
-  # region: ${opt:region, env:AWS_REGION}
+    minify: false
+    # plugins: esbuild-plugins.js
+    bundle: true
+    sourcemap: true
 
   prune:
     automatic: true
     number: 5
-
-  # autoswagger:
-  #   typefiles:
-  #     - './src/api/openapi/types.ts'
-  #   swaggerFiles:
-  #     - './src/api/openapi/openapi.json'
-  #   apiKeyHeaders:
-  #     - Authorization
-  #   excludeStages:
-  #     - prod
-  #   basePath: /${self:custom.basePath}
 
 functions:
   getDataItem:

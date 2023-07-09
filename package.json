@@ -7,6 +7,7 @@
     "build": "lerna run build --stream",
     "build:all": "nx run-many -t build",
     "build:sample": "nx build @lkie/sample-data",
+    "deploy:sample": "nx deploy @lkie/sample-data",
     "shared-model": "lerna run build --stream --scope @lkie/shared-model",
     "aws-commons": "lerna run build --stream --scope @lkie/aws-commons",
     "fix": "eslint --ext .ts --fix ./",
