@@ -10,8 +10,6 @@ plugins:
   - serverless-offline # should be last of 'offline' plugins.
   - serverless-prune-plugin
   
-# useDotenv: true
-
 package:
   individually: true
 
@@ -56,23 +54,12 @@ functions:
     iamRoleStatements:
       - Effect: Allow
         Action:
-        - dynamodb:GetItem
+          - dynamodb:GetItem
         Resource: !GetAtt ItemsTable.Arn
     events:
       - httpApi:
           method: GET
           path: /items/{id}
-          # authorizer: jwtAuthorizer
-          # swaggerTags:
-          #   - items
-          # summary: Gets data item
-          # description: Gets data item
-          # bodyType: GetItemRequest
-          # responseData:
-          #   200:
-          #     bodyType: GetItemResponse
-          #   400:
-          #     description: Bad request
 
 resources:
   Resources:
@@ -81,17 +68,17 @@ resources:
         Properties: 
           AttributeDefinitions: 
             - 
-              AttributeName: "key"
+              AttributeName: "pk"
               AttributeType: "S"
             - 
-              AttributeName: "sort"
+              AttributeName: "sk"
               AttributeType: "S"
           KeySchema: 
             - 
-              AttributeName: "key"
+              AttributeName: "pk"
               KeyType: "HASH"
             - 
-              AttributeName: "sort"
+              AttributeName: "sk"
               KeyType: "RANGE"
           TableName: !Sub "${AWS::StackName}-items"
           BillingMode: PAY_PER_REQUEST

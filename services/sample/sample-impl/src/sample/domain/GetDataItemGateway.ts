@@ -5,9 +5,3 @@ import { GetDataItemUseCaseNotFoundError } from './GetDataItemUseCaseErrors';
 export interface GetDataItemGateway {
 	getDataItem(query: GetDataItemQuery): Promise<UseCaseResult<GetDataItemResponse, GetDataItemUseCaseNotFoundError>>;
 }
-
-// import { GetDataItemQuery, GetDataItemResponse } from '@lkie/sample-api';
-
-// export interface GetDataItemGateway {
-// 	getDataItem(query: GetDataItemQuery): Promise<GetDataItemResponse>;
-// }

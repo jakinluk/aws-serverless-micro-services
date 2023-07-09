@@ -2,7 +2,7 @@
 update aws-sdk
 remove unused dependencies
 "@serverless/typescript" https://github.com/floydspace/serverless-esbuild/issues/437
-
+stage from branch
 
 
 
