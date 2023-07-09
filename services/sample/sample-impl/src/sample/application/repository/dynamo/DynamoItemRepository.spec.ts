@@ -25,8 +25,7 @@ describe('DynamoItemRepository related tests', () => {
 		//given
 		const item = {
 			id: 'hjjhsjh',
-			prop1: 'prop1',
-			prop2: 'prop2',
+			data: 'prop1',
 		};
 		await addItem(item, item.id);
 		//when

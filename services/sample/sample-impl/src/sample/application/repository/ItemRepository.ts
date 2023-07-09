@@ -1,3 +1,3 @@
 export interface ItemRepository {
-	getItem(id: string): Promise<{ [key: string]: unknown }>;
+	getItem(id: string): Promise<Record<string, unknown>>;
 }

@@ -3,8 +3,7 @@ import { EntityId } from '@lkie/shared-model';
 
 export interface ItemProps {
 	id: string;
-	prop1: string;
-	prop2: string;
+	data: string | Record<string, unknown>;
 	createdAt: string;
 	updatedAt: string;
 }
