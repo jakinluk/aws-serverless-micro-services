@@ -4,6 +4,8 @@ remove unused dependencies
 "@serverless/typescript" https://github.com/floydspace/serverless-esbuild/issues/437
 stage from branch
 
+make Business errors not extending Error to a void time consumming stack trace generation - done
+make Technical errors extending Error
 
 
 //////
