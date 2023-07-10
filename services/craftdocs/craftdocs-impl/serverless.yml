@@ -62,7 +62,7 @@ functions:
           method: PUT
           path: /doc/{docId}/update/{uuid}
   logUpdateEvent:
-    handler: src/updateLog/index.logUpdateEventHandler
+    handler: src/updatesLog/index.logUpdateEventHandler
     description: Updates log
     environment: 
       EVENT_LOG_TABLE: !Ref DocChangesLogTable
