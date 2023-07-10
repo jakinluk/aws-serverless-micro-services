@@ -10,7 +10,10 @@ export class DistributeUpdatesService implements DistributeUpdatesGateway {
 	async distribute(command: UpdateDocCommand): Promise<UseCaseResult<UpdateDocCommandResponse, UpdateDocUseCaseError>> {
 		await this.snsClient.publish(
 			{
-				Message: JSON.stringify(command.toJSON()),
+				Message: JSON.stringify(
+					{
+						default: JSON.stringify(command.toJSON()),
+					}),
 				MessageStructure: 'json',
 				TopicArn: this.topicArn,
 			}).promise();

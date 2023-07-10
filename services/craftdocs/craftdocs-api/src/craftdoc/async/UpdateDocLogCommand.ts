@@ -1,6 +1,5 @@
 import { ImmutableDto } from '@lkie/shared-model';
 import { SQSRecord } from 'aws-lambda';
-import { APIGatewayProxyEvent } from 'aws-lambda/trigger/api-gateway-proxy';
 
 
 interface BlockChange {
@@ -34,17 +33,18 @@ export class UpdateDocLogCommand extends ImmutableDto<UpdateDocLogCommandProps> 
 	static fromEvent(event: SQSRecord): UpdateDocLogCommand {
 
 		const body = JSON.parse(event.body);
+		const message = JSON.parse(body.Message);
 
 		//TODO perform validation against schema 
 		const props:UpdateDocLogCommandProps = {
-			docId: body.docId,
-			uuid: body.uuid,
-			userId: body.userId,
-			clientTimestamp: body.timestamp,
-			serverTimestamp: body.serverTimestamp,
-			deviceId: body.deviceId,
-			blocksChanges: body.blocksChanges,
-			blocksPositionsChanges: body.blocksPositionsChanges,
+			docId: message.docId,
+			uuid: message.uuid,
+			userId: message.userId,
+			clientTimestamp: message.clientTimestamp,
+			serverTimestamp: message.serverTimestamp,
+			deviceId: message.deviceId,
+			blocksChanges: message.blocksChanges,
+			blocksPositionsChanges: message.blocksPositionsChanges,
 		};
 		return new UpdateDocLogCommand(props);
 	}

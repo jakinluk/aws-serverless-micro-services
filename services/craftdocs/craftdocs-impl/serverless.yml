@@ -147,4 +147,22 @@ resources:
           Protocol: sqs
           Endpoint: !GetAtt UpdateDocQueue.Arn
           TopicArn: !Ref DocUpdatesTopic
+      
+      SqsPolicy:
+        Type: AWS::SQS::QueuePolicy
+        Properties:
+          Queues: 
+            - !Ref UpdateDocQueue
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Principal:
+                  AWS: '*'
+                Action:
+                  - 'sqs:SendMessage'
+                Resource: !GetAtt UpdateDocQueue.Arn
+                Condition:
+                  ArnEquals:
+                    aws:SourceArn: !Ref DocUpdatesTopic
   

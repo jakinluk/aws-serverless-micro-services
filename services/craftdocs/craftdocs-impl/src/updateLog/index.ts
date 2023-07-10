@@ -5,9 +5,9 @@ import { SQSBatchResponse, SQSEvent } from 'aws-lambda';
 
 const handler = UpdateDocLogHandlerConfiguration.getHandler();
 
-export const updateDocLogHandler = async (
+export const logUpdateEventHandler = async (
 	event: SQSEvent,
 	context: Context,
 ): Promise<SQSBatchResponse> => {
-	return await new BatchedQueueEventsProcessor().processEvent(event, context, handler.handle);
+	return await new BatchedQueueEventsProcessor().processEvent(event, context, (record, context) => handler.handle(record, context));
 };
