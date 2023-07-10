@@ -1,5 +1,5 @@
 import { UseCaseResult } from '@lkie/shared-model';
-import { UpdateDocCommand, UpdateDocCommandResponse } from '../../../../craftdocs-api/src';
+import { UpdateDocCommand, UpdateDocCommandResponse } from '@lkie/craftdocs-api';
 import { UpdateDocUseCaseError } from './UpdateDocsUseCaseErrors';
 
 export interface DistributeUpdatesGateway {
