@@ -14,7 +14,7 @@ export class UpdateDocHandler extends APIGatewayProxyEventHandler<UpdateDocComma
 				return APIGatewayProxyEventHandler.internalServerError(result.getError().message);
 			}
 		} else {
-			return APIGatewayProxyEventHandler.ok(result.getValue());
+			return APIGatewayProxyEventHandler.created();
 		}
 	}
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
