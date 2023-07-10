@@ -3,12 +3,13 @@
 import { ImmutableDto } from '../event/ImmutableDto';
 import { UseCase } from '../use-case/UseCase';
 import { UseCaseResult } from '../use-case/UseCaseResult';
+import { UseCaseVoidResult } from '../use-case/UseCaseVoidResult';
 
 
-export abstract class BaseHandler<I, E extends ImmutableDto<object>, U extends UseCase<E, UseCaseResult<object>>> {
+export abstract class BaseHandler<I, E extends ImmutableDto<object>, U extends UseCase<E, UseCaseResult<object> | UseCaseVoidResult>> {
 	constructor(protected readonly useCase: U) {}
 	async handle(input: I, context: unknown): Promise<unknown> {
 		return await this.useCase.process(this.extractEvent(input, context));
 	}
-  abstract extractEvent(input: I, context: unknown): E;
+  	abstract extractEvent(input: I, context: unknown): E;
 }
