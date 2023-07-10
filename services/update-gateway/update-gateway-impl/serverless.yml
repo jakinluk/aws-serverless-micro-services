@@ -1,4 +1,4 @@
-service: craftdocs
+service: update-gateway
 
 plugins:
   - serverless-esbuild
@@ -61,22 +61,22 @@ functions:
       - httpApi:
           method: PUT
           path: /doc/{docId}/update/{uuid}
-  # logUpdateEvent: #move to dedicated service
-  #   handler: src/index.logUpdateEventHandler
-  #   description: Updates log
-  #   environment: 
-  #     TABLE_NAME: !Ref DocChangesLogTable
-  #   iamRoleStatementsInherit: true
-  #   iamRoleStatements:
-  #     - Effect: Allow
-  #       Action:
-  #         - dynamodb:PutItem
-  #       Resource: !GetAtt DocChangesLogTable.Arn
-  #   events:
-  #     - sqs:
-  #         arn: !GetAtt UpdateDocQueue.Arn
-  #         batchSize: 1
-  #         functionResponseType: ReportBatchItemFailures
+  logUpdateEvent:
+    handler: src/updatesLog/index.logUpdateEventHandler
+    description: Updates log
+    environment: 
+      EVENT_LOG_TABLE: !Ref DocChangesLogTable
+    iamRoleStatementsInherit: true
+    iamRoleStatements:
+      - Effect: Allow
+        Action:
+          - dynamodb:PutItem
+        Resource: !GetAtt DocChangesLogTable.Arn
+    events:
+      - sqs:
+          arn: !GetAtt UpdateDocQueue.Arn
+          batchSize: 1
+          functionResponseType: ReportBatchItemFailures
           
 resources:
   Resources:
@@ -90,6 +90,12 @@ resources:
             - 
               AttributeName: "sk"
               AttributeType: "S"
+            - 
+              AttributeName: "docId"
+              AttributeType: "S"
+            - 
+              AttributeName: "timestamp"
+              AttributeType: "N"
           KeySchema: 
             - 
               AttributeName: "pk"
@@ -97,6 +103,18 @@ resources:
             - 
               AttributeName: "sk"
               KeyType: "RANGE"
+          GlobalSecondaryIndexes:
+            - 
+              IndexName: "docId-timestamp-index"
+              KeySchema: 
+                - 
+                  AttributeName: "docId"
+                  KeyType: "HASH"
+                - 
+                  AttributeName: "timestamp"
+                  KeyType: "RANGE"
+              Projection: 
+                ProjectionType: "ALL"
           TableName: !Sub "${AWS::StackName}-doc-updates-log"
           BillingMode: PAY_PER_REQUEST
       UpdateDocQueue:
@@ -129,4 +147,22 @@ resources:
           Protocol: sqs
           Endpoint: !GetAtt UpdateDocQueue.Arn
           TopicArn: !Ref DocUpdatesTopic
+      
+      SqsPolicy:
+        Type: AWS::SQS::QueuePolicy
+        Properties:
+          Queues: 
+            - !Ref UpdateDocQueue
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Principal:
+                  AWS: '*'
+                Action:
+                  - 'sqs:SendMessage'
+                Resource: !GetAtt UpdateDocQueue.Arn
+                Condition:
+                  ArnEquals:
+                    aws:SourceArn: !Ref DocUpdatesTopic
   

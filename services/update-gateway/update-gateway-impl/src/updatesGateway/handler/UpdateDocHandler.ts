@@ -1,5 +1,5 @@
 import { APIGatewayProxyEventHandler } from '@lkie/aws-commons';
-import { UpdateDocCommand } from '@lkie/craftdocs-api';
+import { UpdateDocCommand } from '@lkie/update-gateway-api';
 import { APIGatewayProxyResult, APIGatewayProxyEvent, Context } from 'aws-lambda';
 import { UpdateDocUseCase } from '../domain/UpdateDocUseCase';
 

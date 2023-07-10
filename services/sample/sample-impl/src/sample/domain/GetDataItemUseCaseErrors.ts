@@ -9,6 +9,6 @@ export class GetDataItemUseCaseNotFoundError extends UseCaseError {
 
 export class GetDataItemUseCaseUnknownError extends UseCaseError {
 	constructor(query: GetDataItemQuery) {
-		super(`Unknown error occured for query: ${JSON.stringify(query)}`);
+		super(`Unknown error occurred for query: ${JSON.stringify(query)}`);
 	}
 }
