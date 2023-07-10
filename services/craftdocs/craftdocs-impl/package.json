@@ -9,6 +9,7 @@
     "lint:fix": "npx eslint . --ext .ts --fix",
     "start": "npx serverless offline cloudside --noAuth",
     "deploy": "npx serverless deploy",
+    "destroy": "npx serverless remove",
     "build": "npx serverless package"
   },
   "dependencies": {
