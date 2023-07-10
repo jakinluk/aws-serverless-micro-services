@@ -45,7 +45,7 @@ functions:
     handler: src/updatesGateway/index.updatesGatewayHandler
     description: distributes updates
     environment: 
-      UPDATES_TOPIC_ARN: !Ref UpdateDocTopic
+      UPDATES_TOPIC_ARN: !Ref DocUpdatesTopic
       UPDATE_QUEUE_URL: !Ref UpdateDocQueue
     iamRoleStatementsInherit: true
     iamRoleStatements:
@@ -56,7 +56,7 @@ functions:
       - Effect: Allow
         Action:
           - sns:Publish
-        Resource: !Ref UpdateDocTopic
+        Resource: !Ref DocUpdatesTopic
     events:
       - httpApi:
           method: PUT
@@ -105,9 +105,6 @@ resources:
           QueueName: !Sub "${AWS::StackName}-update-doc-queue"
           MessageRetentionPeriod: 240
           VisibilityTimeout: 20
-          FifoQueue: true
-          ContentBasedDeduplication: true
-          DeduplicationScope: messageGroup
           RedrivePolicy:
             deadLetterTargetArn: !GetAtt UpdateDocQueueDLQ.Arn
             maxReceiveCount: 3
@@ -117,13 +114,19 @@ resources:
         Properties:
           QueueName: !Sub "${AWS::StackName}-update-doc-queue-dlq"
           MessageRetentionPeriod: 1209600 # max, 14 days
-          FifoQueue: true
           Tags:
             - Key: Type
               Value: DLQ
           
-      UpdateDocTopic:
+      DocUpdatesTopic:
         Type: AWS::SNS::Topic
         Properties:
           TopicName: !Sub "${AWS::StackName}-update-doc-topic"
+      
+      SnsSubscription:
+        Type: AWS::SNS::Subscription
+        Properties:
+          Protocol: sqs
+          Endpoint: !GetAtt UpdateDocQueue.Arn
+          TopicArn: !Ref DocUpdatesTopic
   
