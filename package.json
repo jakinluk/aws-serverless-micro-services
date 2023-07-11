@@ -11,7 +11,7 @@
     "destroy:sample": "nx destroy @lkie/sample-data",
     "build:craftdocs": "nx build @lkie/craftdocs-impl",
     "deploy:craftdocs": "nx deploy @lkie/craftdocs-impl",
-    "destroy:craftdocs": "nx deploy @lkie/craftdocs-impl",
+    "destroy:craftdocs": "nx destroy @lkie/craftdocs-impl",
     "shared-model": "lerna run build --stream --scope @lkie/shared-model",
     "aws-commons": "lerna run build --stream --scope @lkie/aws-commons",
     "fix": "eslint --ext .ts --fix ./",
