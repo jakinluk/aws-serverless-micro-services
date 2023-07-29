@@ -1,5 +1,5 @@
 # aws-serverless-micro-services
 
 ## Installation
-run `yarn install && yarn deploy:craftdocs`
+run `yarn install && yarn deploy:update-gateway`
 

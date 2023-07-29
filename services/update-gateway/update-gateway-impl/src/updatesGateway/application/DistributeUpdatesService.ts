@@ -1,6 +1,6 @@
 import { UseCaseResult } from '@lkie/shared-model';
 import { DistributeUpdatesGateway } from '../domain/DistributeUpdatesGateway';
-import { UpdateDocCommand, UpdateDocCommandResponse } from '@lkie/craftdocs-api';
+import { UpdateDocCommand, UpdateDocCommandResponse } from '@lkie/update-gateway-api';
 import { UpdateDocUseCaseError } from '../domain/UpdateDocsUseCaseErrors';
 import { SNS } from 'aws-sdk';
 

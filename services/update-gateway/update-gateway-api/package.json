@@ -1,5 +1,5 @@
 {
-  "name": "@lkie/craftdocs-api",
+  "name": "@lkie/update-gateway-api",
   "version": "1.0.0",
   "description": "sample service API",
   "main": "index.js",

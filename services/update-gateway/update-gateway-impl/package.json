@@ -1,5 +1,5 @@
 {
-  "name": "@lkie/craftdocs-impl",
+  "name": "@lkie/update-gateway-impl",
   "version": "1.0.0",
   "description": "sample service data",
   "scripts": {
@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "aws-sdk": "2.1413.0",
-    "@lkie/craftdocs-api": "^1.0.0",
+    "@lkie/update-gateway-api": "^1.0.0",
     "@lkie/aws-commons": "1.0.0",
     "@lkie/shared-model": "1.0.0"
   },

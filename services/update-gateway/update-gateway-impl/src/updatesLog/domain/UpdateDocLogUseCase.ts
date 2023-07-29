@@ -1,6 +1,6 @@
 import { UseCase } from '@lkie/shared-model';
 import { UpdateDocLogUseCaseError } from './UpdateDocLogUseCaseErrors';
-import { UpdateDocLogCommand } from '@lkie/craftdocs-api';
+import { UpdateDocLogCommand } from '@lkie/update-gateway-api';
 import { PersistGateway } from './PersistGateway';
 import { UseCaseVoidResult } from '@lkie/shared-model/src/use-case/UseCaseVoidResult';
 

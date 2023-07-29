@@ -1,4 +1,4 @@
-import { UpdateDocLogCommand } from '@lkie/craftdocs-api';
+import { UpdateDocLogCommand } from '@lkie/update-gateway-api';
 import { Entity } from '@lkie/shared-model';
 import { EntityId } from '@lkie/shared-model';
 

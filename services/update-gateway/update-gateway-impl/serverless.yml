@@ -1,4 +1,4 @@
-service: craftdocs
+service: update-gateway
 
 plugins:
   - serverless-esbuild

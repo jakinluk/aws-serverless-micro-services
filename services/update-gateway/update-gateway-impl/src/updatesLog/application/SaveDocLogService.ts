@@ -2,7 +2,7 @@
 import { PersistGateway } from '../domain/PersistGateway';
 import { UseCaseVoidResult } from '@lkie/shared-model/src/use-case/UseCaseVoidResult';
 import { UpdateDocLogUseCaseError } from '../domain/UpdateDocLogUseCaseErrors';
-import { UpdateDocLogCommand } from '@lkie/craftdocs-api';
+import { UpdateDocLogCommand } from '@lkie/update-gateway-api';
 import { DocEventLog } from '../domain/model/DocEventLog';
 import { DocEventLogRepository } from './repository/DocEventLogRepository';
 

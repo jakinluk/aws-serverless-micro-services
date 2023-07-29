@@ -1,5 +1,5 @@
 import { UseCaseError } from '@lkie/shared-model';
-import { UpdateDocCommand } from '@lkie/craftdocs-api';
+import { UpdateDocCommand } from '@lkie/update-gateway-api';
 
 export class UpdateDocUseCaseError extends UseCaseError {
 	constructor(query: UpdateDocCommand) {

@@ -1,5 +1,5 @@
 import { SqsRecordHandler } from '@lkie/aws-commons';
-import { UpdateDocLogCommand } from '@lkie/craftdocs-api';
+import { UpdateDocLogCommand } from '@lkie/update-gateway-api';
 import { Context } from 'aws-lambda';
 import { SQSRecord } from 'aws-lambda';
 import { UpdateDocLogUseCase } from '../domain/UpdateDocLogUseCase';
