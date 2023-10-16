@@ -1,6 +1,6 @@
 import { UseCaseError } from './UseCaseError';
 
-export class UseCaseVoidResult<E = UseCaseError> {
+export class UseCaseVoidResult<E = UseCaseError | undefined> {
 	constructor(private error: E) {}
 
 	getError(): E {
