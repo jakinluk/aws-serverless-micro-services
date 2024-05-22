@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "author": "",
   "license": "ISC",
-  "engines": {
-    "node": ">=16.17.0 <17.0.0"
-  },
   "scripts": {
     "install:dev": "yarn install --frozen-lockfile",
     "test": "npx jest test",

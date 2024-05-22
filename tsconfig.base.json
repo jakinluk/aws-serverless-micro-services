@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
-    "lib": [
-      "es2020",
-      "ES2020.Promise",
-    ],
+    "lib": ["es2020", "ES2020.Promise"],
     "removeComments": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
@@ -20,15 +17,13 @@
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "rootDirs": [
-      ".",
-    ],
+    "rootDirs": ["."],
     "baseUrl": ".",
     "paths": {
-      "@lkie/shared-model": ["packages/shared-kernel/shared-model/src/index.ts"],
       "@lkie/aws-commons": ["packages/shared-kernel/aws-commons/src/index.ts"],
       "@lkie/sample-api": ["services/sample/sample-api/src/index.ts"],
-      "@lkie/update-gateway-api": ["services/update-gateway/update-gateway-api/src/index.ts"],
+      "@lkie/shared-model": ["packages/shared-kernel/shared-model/src/index.ts"],
+      "@lkie/update-gateway-api": ["services/update-gateway/update-gateway-api/src/index.ts"]
     }
-  },
+  }
 }

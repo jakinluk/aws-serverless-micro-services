@@ -12,5 +12,13 @@
       "dependsOn": ["^build"],
       "outputs": ["{projectRoot}/.build"]
     }
-  }
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/jest/plugin",
+      "options": {
+        "targetName": "test"
+      }
+    }
+  ]
 }

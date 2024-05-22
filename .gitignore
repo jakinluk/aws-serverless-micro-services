@@ -8,3 +8,4 @@ lib
 yarn-error.log
 .env
 NOTES
+.nx
