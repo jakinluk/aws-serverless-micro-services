@@ -50,7 +50,8 @@
     "typescript": "^5.1.6",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^5.74.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "yarn-audit-fix": "^10.0.7"
   },
   "author": "Lukasz Kiedrowski",
   "license": "UNLICENSED",
