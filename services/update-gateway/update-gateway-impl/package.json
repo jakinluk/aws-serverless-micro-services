@@ -42,7 +42,7 @@
     "targets": {
       "build": {
         "outputs": [
-          "./.serverless"
+          "{projectRoot}/.serverless"
         ]
       }
     }
